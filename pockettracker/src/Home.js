@@ -6,7 +6,7 @@ function Home() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Welcome to PocketTracker</h1>
-      <p>Sign up or log in to get started!</p>
+      <p>Sign up or log in to access your account.</p>
       <div>
         <Link to="/login">
           <button>Login</button>
