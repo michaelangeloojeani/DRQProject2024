@@ -8,22 +8,17 @@ import App from "./App";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-ReactDOM.render(
-  <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/app" element={<App />} />
-    </Routes>
-  </Router>,
-  document.getElementById("root")
-);
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/app" element={<App />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
