@@ -1,10 +1,14 @@
 import React from "react";
+import NavigationBar from "./components/NavigationBar"; // Import the Navigation Bar component
 
 function App({ username }) {
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Welcome, {username}!</h1>
-    </div>
+    <>
+      <NavigationBar /> {/* Add the navigation bar */}
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <h1>Welcome, {username ? username : "Guest"}!</h1>
+      </div>
+    </>
   );
 }
 

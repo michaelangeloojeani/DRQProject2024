@@ -10,11 +10,23 @@ function SignUp({ setUsername }) {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
+    if (!username || !password) {
+      alert("Please enter a valid username and password.");
+      return;
+    }
+
     try {
-      const response = await axios.post("http://localhost:4000/signup", { username, password });
-      setUsername(response.data.username); // Set the username globally for the app
-      navigate("/app"); // Redirect to the main app
+      // Send a POST request to the backend API
+      const response = await axios.post("http://localhost:4000/api/users", {
+        username,
+        password,
+      });
+      
+      // Set the username globally and navigate to the main app
+      setUsername(response.data.user.username); // Use the correct response data structure
+      navigate("/app");
     } catch (error) {
+      console.error("Error signing up:", error.response || error.message); // Log errors for debugging
       alert(error.response?.data?.message || "Error signing up");
     }
   };

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import SignUp from "./SignUp";
+import Home from "./components/Home";
+import SignUp from "./components/SignUp";
 import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Root = () => {
