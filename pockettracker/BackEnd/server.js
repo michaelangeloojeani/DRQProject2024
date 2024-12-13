@@ -34,73 +34,86 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
 });
-
 const userModel = mongoose.model("User", userSchema);
+
+// Expense Schema
+const expenseSchema = new mongoose.Schema({
+  description: String,
+  amount: Number,
+  category: String,
+  date: { type: Date, default: Date.now },
+});
+const expenseModel = mongoose.model("Expense", expenseSchema);
 
 // CRUD Endpoints for Users
 
-// Get all users
-app.get("/api/users", async (req, res) => {
+// (Add existing user CRUD endpoints here)
+
+// CRUD Endpoints for Expenses
+
+// Create a new expense
+app.post("/api/expenses", async (req, res) => {
   try {
-    const users = await userModel.find({});
-    res.status(200).json(users);
+    const { description, amount, category } = req.body;
+    const newExpense = new expenseModel({ description, amount, category });
+    await newExpense.save();
+    res.status(201).json({ message: "Expense created", expense: newExpense });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error });
+    res.status(500).json({ message: "Error creating expense", error });
   }
 });
 
-// Get a single user by ID
-app.get("/api/user/:id", async (req, res) => {
+// Get all expenses
+app.get("/api/expenses", async (req, res) => {
   try {
-    const user = await userModel.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    const expenses = await expenseModel.find({});
+    res.status(200).json(expenses);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching expenses", error });
+  }
+});
+
+// Get a single expense by ID
+app.get("/api/expenses/:id", async (req, res) => {
+  try {
+    const expense = await expenseModel.findById(req.params.id);
+    if (!expense) {
+      return res.status(404).json({ message: "Expense not found" });
     }
-    res.status(200).json(user);
+    res.status(200).json(expense);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching user", error });
+    res.status(500).json({ message: "Error fetching expense", error });
   }
 });
 
-// Create a new user (Sign-Up)
-app.post("/api/users", async (req, res) => {
+// Update an expense
+app.put("/api/expenses/:id", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const newUser = new userModel({ username, password });
-    await newUser.save();
-    res.status(201).json({ message: "User created", user: newUser });
-  } catch (error) {
-    res.status(500).json({ message: "Error creating user", error });
-  }
-});
-
-// Update a user's information
-app.put("/api/user/:id", async (req, res) => {
-  try {
-    const updatedUser = await userModel.findByIdAndUpdate(
+    const { description, amount, category } = req.body;
+    const updatedExpense = await expenseModel.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { description, amount, category },
       { new: true }
     );
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
+    if (!updatedExpense) {
+      return res.status(404).json({ message: "Expense not found" });
     }
-    res.status(200).json({ message: "User updated", user: updatedUser });
+    res.status(200).json({ message: "Expense updated", expense: updatedExpense });
   } catch (error) {
-    res.status(500).json({ message: "Error updating user", error });
+    res.status(500).json({ message: "Error updating expense", error });
   }
 });
 
-// Delete a user
-app.delete("/api/user/:id", async (req, res) => {
+// Delete an expense
+app.delete("/api/expenses/:id", async (req, res) => {
   try {
-    const deletedUser = await userModel.findByIdAndDelete(req.params.id);
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
+    const deletedExpense = await expenseModel.findByIdAndDelete(req.params.id);
+    if (!deletedExpense) {
+      return res.status(404).json({ message: "Expense not found" });
     }
-    res.status(200).json({ message: "User deleted", user: deletedUser });
+    res.status(200).json({ message: "Expense deleted", expense: deletedExpense });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting user", error });
+    res.status(500).json({ message: "Error deleting expense", error });
   }
 });
 

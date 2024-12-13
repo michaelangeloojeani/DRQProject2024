@@ -13,7 +13,7 @@ const NavigationBar = () => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/signup">Sign Up</Nav.Link>
-            <Nav.Link href="/app">Dashboard</Nav.Link>
+            <Nav.Link href="/add-expense">Add Expense</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
