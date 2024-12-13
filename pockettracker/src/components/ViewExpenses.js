@@ -18,11 +18,24 @@ const ViewExpenses = () => {
       });
   }, []); // Empty dependency array ensures this runs only once
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:4000/api/expenses/${id}`)
+      .then(() => {
+        alert("Expense deleted successfully!");
+        setExpenses(expenses.filter((expense) => expense._id !== id)); // Remove the deleted expense from state
+      })
+      .catch((error) => {
+        console.error("Error deleting expense:", error);
+        alert("Failed to delete expense.");
+      });
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Your Expenses</h2>
       {expenses.length > 0 ? (
-        <ExpensesList expenses={expenses} />
+        <ExpensesList expenses={expenses} onDelete={handleDelete} />
       ) : (
         <p>No expenses found. Add some!</p>
       )}

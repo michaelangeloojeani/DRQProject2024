@@ -25,8 +25,8 @@ function SignUp({ setUsername }) {
       // Set the username globally in App.js
       setUsername(response.data.user.username);
 
-      // Redirect to the main app
-      navigate("/app/add-expense");
+      // Redirect to the Home page
+      navigate("/");
     } catch (error) {
       console.error("Error signing up:", error.response || error.message);
       alert(error.response?.data?.message || "Error signing up.");
