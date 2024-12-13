@@ -74,8 +74,8 @@ const EditExpense = () => {
           >
             <option value="Leisure">Leisure</option>
             <option value="Food">Food</option>
-            <option value="Rent">Rent</option>
-            <option value="Phone Bill">Phone Bill</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bill">Bills</option>
             <option value="Other">Other</option>
           </select>
         </div>

@@ -5,12 +5,13 @@ import AddExpense from "./components/AddExpense";
 import ViewExpenses from "./components/ViewExpenses";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [username, setUsername] = useState(""); // Global username state
 
   const appStyle = {
-    backgroundColor: "#203cd9", // Set background color
+    backgroundColor: "#5121de", // Set background color
     minHeight: "100vh", // Ensure it covers the full viewport height
     padding: 0,
     margin: 0,

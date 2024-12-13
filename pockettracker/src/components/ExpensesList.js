@@ -1,26 +1,20 @@
 import React from "react";
+import ExpenseItem from "./ExpenseItem";
 
-const ExpenseItem = ({ expense, onDelete }) => {
+const ExpensesList = ({ expenses, onDelete }) => {
+  if (!expenses || expenses.length === 0) {
+    return <p>No expenses available.</p>;
+  }
+
   return (
-    <div style={{ border: "1px solid #ccc", margin: "10px", padding: "10px", borderRadius: "5px" }}>
-      <h3>{expense.description}</h3>
-      <p>Amount: ${expense.amount}</p>
-      <p>Category: {expense.category}</p>
-      <p>Date: {new Date(expense.date).toLocaleDateString()}</p>
-      <button
-        onClick={() => onDelete(expense._id)}
-        style={{
-          backgroundColor: "#d9534f",
-          color: "#fff",
-          border: "none",
-          padding: "5px 10px",
-          cursor: "pointer",
-        }}
-      >
-        Delete
-      </button>
+    <div>
+      {expenses.map((expense) =>
+        expense ? (
+          <ExpenseItem key={expense._id} expense={expense} onDelete={onDelete} />
+        ) : null
+      )}
     </div>
   );
 };
 
-export default ExpenseItem;
+export default ExpensesList;

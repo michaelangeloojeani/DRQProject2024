@@ -6,24 +6,22 @@ const ViewExpenses = () => {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    // Fetch expenses from the backend
     axios
       .get("http://localhost:4000/api/expenses")
       .then((response) => {
-        console.log("Fetched expenses:", response.data);
-        setExpenses(response.data); // Update state with fetched expenses
+        setExpenses(response.data);
       })
       .catch((error) => {
         console.error("Error fetching expenses:", error);
       });
-  }, []); // Empty dependency array ensures this runs only once
+  }, []);
 
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:4000/api/expenses/${id}`)
       .then(() => {
         alert("Expense deleted successfully!");
-        setExpenses(expenses.filter((expense) => expense._id !== id)); // Remove the deleted expense from state
+        setExpenses(expenses.filter((expense) => expense._id !== id));
       })
       .catch((error) => {
         console.error("Error deleting expense:", error);
