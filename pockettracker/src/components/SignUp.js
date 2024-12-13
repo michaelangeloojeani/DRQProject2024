@@ -3,14 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function SignUp({ setUsername }) {
-  const [username, setInputUsername] = useState("");
+  const [inputUsername, setInputUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if (!username || !password) {
+    if (!inputUsername || !password) {
       alert("Please enter a valid username and password.");
       return;
     }
@@ -18,16 +18,18 @@ function SignUp({ setUsername }) {
     try {
       // Send a POST request to the backend API
       const response = await axios.post("http://localhost:4000/api/users", {
-        username,
+        username: inputUsername,
         password,
       });
-      
-      // Set the username globally and navigate to the main app
-      setUsername(response.data.user.username); // Use the correct response data structure
-      navigate("/app");
+
+      // Set the username globally in App.js
+      setUsername(response.data.user.username);
+
+      // Redirect to the main app
+      navigate("/app/add-expense");
     } catch (error) {
-      console.error("Error signing up:", error.response || error.message); // Log errors for debugging
-      alert(error.response?.data?.message || "Error signing up");
+      console.error("Error signing up:", error.response || error.message);
+      alert(error.response?.data?.message || "Error signing up.");
     }
   };
 
@@ -37,7 +39,7 @@ function SignUp({ setUsername }) {
       <input
         type="text"
         placeholder="Username"
-        value={username}
+        value={inputUsername}
         onChange={(e) => setInputUsername(e.target.value)}
         required
       />

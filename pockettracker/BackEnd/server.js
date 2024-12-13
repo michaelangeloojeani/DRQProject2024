@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // MongoDB Connection
 mongoose
   .connect(
-    "mongodb+srv://g00416140:admin@cluster0.1fsat.mongodb.net/yourDatabaseName",
+    "mongodb+srv://g00416140:admin@cluster0.1fsat.mongodb.net/pocketTracker",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("MongoDB connected"))
