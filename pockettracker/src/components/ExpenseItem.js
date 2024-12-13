@@ -17,8 +17,8 @@ const ExpenseItem = ({ expense, onDelete }) => {
   const { description, amount, category, date } = expense;
 
   return (
-    <Card style={{ marginBottom: "15px", borderRadius: "10px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}>
-      <Card.Header style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+    <Card style={{marginBottom: "15px", borderRadius: "10px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}>
+      <Card.Header style={{  backgroundColor: "#663ce2", display: "flex", alignItems: "center", gap: "10px" }}>
         {categoryIcons[category] || <FaTag />} <span>{category || "No Category"}</span>
       </Card.Header>
       <Card.Body>
