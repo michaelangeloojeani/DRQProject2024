@@ -1,11 +1,9 @@
-import './App.css';
 import React from "react";
 
-function App() {
+function App({ username }) {
   return (
-    <div>
-      <h1>Welcome to PocketTracker!</h1>
-      <p>This is the main application page after login.</p>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Welcome, {username}!</h1>
     </div>
   );
 }
